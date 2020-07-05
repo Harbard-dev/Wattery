@@ -157,3 +157,40 @@ int readSensor()
   digitalWrite(sensorPower, LOW);        // dacik sonur
   return valWater;                       // son
 }
+#include <ESP8266WiFi.h>
+
+const char* ssid = "Wattery"; //SHebeke adi
+const char* password = "AQUAHACK777"; //Shebeke parolu
+
+void setup() {
+delay(1000);
+Serial.begin(115200);
+Serial.println();
+Serial.println();
+Serial.print("Wifi giris noqtesinin qurulmasi");
+
+boolean result = WiFi.softAP(ssid, password);
+if(result==true) {
+IPAddress myIP = WiFi.softAPIP();
+
+Serial.println("Hazirdi");
+Serial.println("");
+Serial.print("Wifi shebeke adi: ");
+Serial.println(ssid);
+Serial.print("Wifi shebeke parolu: ");
+Serial.println(password);
+Serial.print("Host IP unvan: ");
+Serial.println(myIP);
+Serial.println("");
+
+}
+
+else {
+Serial.println("Xeta bash verdi yeniden cehd edin");
+}
+}
+
+void loop() {
+Serial.printf("Qosulmus cihazlarin sayi = %d\n", WiFi.softAPgetStationNum());
+delay(3000);
+}
